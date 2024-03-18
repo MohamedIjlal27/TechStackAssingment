@@ -1,4 +1,14 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+I have successfully implemented a comprehensive set of tasks encompassing user authentication and data management using various technologies. Specifically, I have developed functionalities for user sign-up, login, and data retrieval from a MongoDB database using Node.js and Express.js. Additionally, I have implemented CRUD (Create, Read, Update, Delete) operations for a ToDo application using SQLite as the database management system.
+
+These tasks involved:
+
+1. **User Authentication (Sign Up & Login)**: Utilizing MongoDB as the database backend, I implemented secure sign-up and login functionalities to allow users to create accounts and authenticate themselves securely. Node.js and Express.js were leveraged to build the server-side logic for handling user authentication requests.
+
+2. **Data Retrieval from MongoDB**: With the MongoDB database, I created endpoints in the Node.js server to facilitate the retrieval of user data from the database. This involved querying the MongoDB database to fetch user information based on specified criteria, such as email or user ID.
+
+3. **ToDo CRUD Operations with SQLite**: I developed a ToDo application that performs CRUD operations using SQLite as the underlying database. This involved creating tables to store ToDo items, implementing logic to add, retrieve, update, and delete ToDo entries, and exposing endpoints in the Node.js server to handle these operations.
+
+Overall, these tasks allowed me to gain practical experience in building robust and scalable web applications, handling user authentication securely, and performing database operations efficiently using both MongoDB and SQLite.
 
 # Getting Started
 
