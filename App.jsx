@@ -2,12 +2,10 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Welcome from './src/Screens/Welcome';
-import RegisterScreen from './src/Screens/RegisterScreen';
-import LoginScreen from './src/Screens/LoginScreen';
 import DrawerScreen from './src/Screens/DrawerScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LogBox } from 'react-native';
+import StartScreen from './src/Screens/StartScreen'
 
 
 LogBox.ignoreAllLogs();
@@ -33,12 +31,8 @@ const App = () => {
         <NavigationContainer>
             {
                 isLoggedIn ? (<Stack.Navigator><Stack.Screen name="DrawerScreen" component={DrawerScreen} options={{ headerShown: false }} /></Stack.Navigator>) :
-                    (<Stack.Navigator>
-                        <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
-                        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-                        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-                        <Stack.Screen name="DrawerScreen" component={DrawerScreen} options={{ headerShown: false }} />
-                    </Stack.Navigator>
+                    (
+                        <Stack.Navigator><Stack.Screen name="StartScreen" component={StartScreen} options={{ headerShown: false }} /></Stack.Navigator>
                     )
 
             }
