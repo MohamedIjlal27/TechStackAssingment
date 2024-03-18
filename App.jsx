@@ -7,9 +7,11 @@ import RegisterScreen from './src/Screens/RegisterScreen';
 import LoginScreen from './src/Screens/LoginScreen';
 import DrawerScreen from './src/Screens/DrawerScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LogBox } from 'react-native';
-import { ToastProvider } from 'react-native-toast-notifications';
+
+
+LogBox.ignoreAllLogs();
+
 
 const Stack = createStackNavigator();
 
@@ -40,6 +42,7 @@ const App = () => {
                     )
 
             }
+
         </NavigationContainer>
     );
 };
