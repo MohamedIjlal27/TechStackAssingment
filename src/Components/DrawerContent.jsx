@@ -49,7 +49,8 @@ function DrawerContent(props) {
   function signOut() {
     AsyncStorage.setItem('isLoggedIn', '');
     AsyncStorage.setItem('token', '');
-    navigation.navigate('StackNav');
+    navigation.navigate("Welcome");
+
   }
 
   const [userData, setUserData] = useState('');

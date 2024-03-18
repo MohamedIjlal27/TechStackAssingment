@@ -15,7 +15,6 @@ const LoginScreen = () => {
     const [passwordVerify, setPasswordVerify] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-
     const handleEmail = (text) => {
         setEmail(text);
         setEmailVerify(/^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(text));
@@ -26,8 +25,6 @@ const LoginScreen = () => {
         setPasswordVerify(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(text));
     };
 
-
-
     const handleLogin = () => {
         console.log(email, password);
         const userData = {
@@ -36,9 +33,8 @@ const LoginScreen = () => {
         }
         axios.post("http://192.168.29.218:5001/loginuser", userData)
             .then((res) => {
-                console.log(res.data);
                 if (res.data.status === "OK") {
-                    Alert.alert("Logged In Successfull");
+                    Alert.alert("Logged In Successfully");
                     AsyncStorage.setItem("token", res.data.data);
                     AsyncStorage.setItem('isLoggedIn', JSON.stringify(true));
                     navigation.navigate("DrawerScreen");
@@ -46,13 +42,9 @@ const LoginScreen = () => {
                     Alert.alert("Login Failed", "Invalid email or password");
                 }
             }).catch((error) => {
-
-                Alert.alert("Error", error);
-            })
-
+                Alert.alert("Error", error.message);
+            });
     };
-
-
 
     return (
         <View style={styles.container}>
@@ -67,23 +59,22 @@ const LoginScreen = () => {
                     verify={emailVerify}
                     value={email}
                 />
-
                 <TextInputComp
                     style={styles.input}
-                    placeholder="User Password"
+                    placeholder="Password"
                     onChangeText={handlePassword}
-                    value={password}
-                    secureTextEntry={showPassword}
+                    secureTextEntry={!showPassword}
                     showPassword={showPassword}
                     setShowPassword={setShowPassword}
                     verify={passwordVerify}
+                    value={password}
                 />
-
                 <ButtonComp stylebtn={styles.button} styletxt={styles.text} text="SIGN IN" onPress={handleLogin} />
             </ScrollView>
         </View>
     );
 };
+
 
 const { width, height } = Dimensions.get('window');
 

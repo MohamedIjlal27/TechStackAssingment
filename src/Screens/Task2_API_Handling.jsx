@@ -1,83 +1,96 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import axios from 'axios';
-
-const API_ENDPOINT = 'https://devapi.whitehouseproductsltd.com/token';
-const USERNAME = 'apiuser@stacktech.io';
-const PASSWORD = '!Temp123';
-const API_SECRET = '!api123';
+import { Card } from 'react-native-paper';
 
 const Task2 = () => {
-    const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const tokenResponse = await axios.post(API_ENDPOINT, {
-                    username: USERNAME,
-                    password: PASSWORD,
-                    api_secret: API_SECRET,
-                });
-
-                const authToken = tokenResponse.data.token;
-
-                const response = await axios.get('API_ENDPOINT', {
+    const fetchData = async () => {
+        try {
+            const tokenResponse = await axios.post(
+                'https://devapi.whitehouseproductsltd.com/token',
+                {
+                    User: 'apiuser@stacktech.io',
+                    Password: '!Temp123',
+                    Secret: '!api123'
+                }
+            );
+            const token = tokenResponse.data.Token;
+            const dataResponse = await axios.post(
+                'https://devapi.whitehouseproductsltd.com/token',
+                {
                     headers: {
-                        Authorization: `Bearer ${authToken}`,
-                    },
-                });
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
 
-                setData(response.data);
-                setLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setLoading(false);
-            }
-        };
+            setData(dataResponse.data);
+            console.log('Data:', dataResponse.data);
+            setLoading(false);
+        } catch (error) {
+            console.log(error.response);
+            setError('Error fetching data. Please try again later.');
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 
     if (loading) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" color="blue" />
+            <View style={styles.container}>
+                <ActivityIndicator size="large" color="#0000ff" />
             </View>
         );
     }
 
     if (error) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Error: {error}</Text>
-            </View>
-        );
-    }
-
-    if (!data) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>No data available</Text>
+            <View style={styles.container}>
+                <Text style={styles.errorText}>{error}</Text>
             </View>
         );
     }
 
     return (
-        <View style={{ flex: 1, padding: 20 }}>
-            <FlatList
-                data={data}
-                renderItem={({ item }) => (
-                    <View>
-                        <Text>{item.property1}</Text>
-                        <Text>{item.property2}</Text>
-                    </View>
-                )}
-                keyExtractor={(item, index) => index.toString()}
-            />
+        <View style={styles.container}>
+            <Card style={styles.card}>
+                <Card.Content>
+                    <Text style={styles.dataText}>{JSON.stringify(data)}</Text>
+                </Card.Content>
+            </Card>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f0f0f0',
+    },
+    card: {
+        width: '80%',
+        borderRadius: 10,
+        elevation: 5,
+    },
+    dataText: {
+        fontSize: 16,
+        color: '#333',
+        textAlign: 'center',
+    },
+    errorText: {
+        fontSize: 16,
+        color: 'red',
+        textAlign: 'center',
+    },
+});
 
 export default Task2;

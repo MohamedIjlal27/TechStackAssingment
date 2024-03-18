@@ -19,8 +19,8 @@ const Welcome = () => {
     <View style={styles.container}>
       <ImageComp source={require('../../Assets/StackTech.png')} style={styles.image} />
       <View style={styles.choice}>
-        <ButtonComp onPress={() => navigation.navigate("Login Screen", showToast("Welcome to Login!"))} stylebtn={styles.button} styletxt={styles.text} text={"Login"} />
-        <ButtonComp onPress={() => navigation.navigate("Register Screen", showToast("Welcome to Register!"))} stylebtn={styles.button} styletxt={styles.text} text={"Register"} />
+        <ButtonComp onPress={() => navigation.navigate("LoginScreen")} stylebtn={styles.button} styletxt={styles.text} text={"Login"} />
+        <ButtonComp onPress={() => navigation.navigate("RegisterScreen")} stylebtn={styles.button} styletxt={styles.text} text={"Register"} />
       </View>
     </View>
   );

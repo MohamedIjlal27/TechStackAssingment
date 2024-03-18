@@ -1,6 +1,4 @@
 import 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
-import { ToastProvider } from 'react-native-toast-notifications';
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,50 +9,41 @@ import DrawerScreen from './src/Screens/DrawerScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LogBox } from 'react-native';
+import { ToastProvider } from 'react-native-toast-notifications';
 
-LogBox.ignoreLogs(['Reanimated 2']);
-
-const DrawScreen = () => {
-    const Stack = createNativeStackNavigator();
-    return (
-        <Stack.Navigator >
-            <Stack.Screen name="DrawerScreen" component={DrawerScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="StackNav" component={StackNav} options={{ headerShown: false }} />
-        </Stack.Navigator>
-    )
-}
-
-const StackNav = () => {
-    const Stack = createStackNavigator();
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
-            <Stack.Screen name="Login Screen" component={LoginScreen} options={{ animation: 'slide_from_left' }} />
-            <Stack.Screen name="Register Screen" component={RegisterScreen} options={{ animation: 'slide_from_right' }} />
-        </Stack.Navigator>
-    )
-}
+const Stack = createStackNavigator();
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const getData = async () => {
-            const data = await AsyncStorage.getItem("isLoggedIn");
-            setIsLoggedIn(data === 'true');
-        };
         getData();
     }, []);
 
+    const getData = async () => {
+        const data = await AsyncStorage.getItem("isLoggedIn");
+        if (data) {
+            setIsLoggedIn(true);
+        }
+    };
+
     return (
         <NavigationContainer>
-            <ToastProvider>
-                {isLoggedIn ? <DrawScreen /> : <StackNav />}
-            </ToastProvider>
+            {
+                isLoggedIn ? (<Stack.Navigator><Stack.Screen name="DrawerScreen" component={DrawerScreen} options={{ headerShown: false }} /></Stack.Navigator>) :
+                    (<Stack.Navigator>
+                        <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+                        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+                        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+                        <Stack.Screen name="DrawerScreen" component={DrawerScreen} options={{ headerShown: false }} />
+                    </Stack.Navigator>
+                    )
+
+            }
         </NavigationContainer>
     );
 };
 
 export default App;
 
-const styles = StyleSheet.create({});
+

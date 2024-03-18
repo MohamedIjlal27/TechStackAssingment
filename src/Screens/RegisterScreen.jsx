@@ -53,7 +53,7 @@ const RegisterScreen = () => {
                     console.log(res.data);
                     if (res.data.status === "OK") {
                         Alert.alert('Success', res.data.message);
-                        navigation.navigate("Login Screen");
+                        navigation.navigate("LoginScreen");
                     } else if (res.data.message === "Email already exists") {
                         Alert.alert('Error', 'Email already exists');
                     } else {
