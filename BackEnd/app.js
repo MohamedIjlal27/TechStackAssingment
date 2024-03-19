@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const mongoUrl =
-  'mongodb+srv://ijlalssck1940:ijlalssck1940@cluster0.jvm2wp8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+  'mongodb+srv://ijlalssck1940:ijlalssck1940@cluster0.jvm2wp8.mongodb.net/';
 
 const JWT_SECRET =
   'hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jdsds039[]]pou89ywe';

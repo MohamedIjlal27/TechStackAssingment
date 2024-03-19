@@ -49,6 +49,7 @@ function DrawerContent(props) {
   function signOut() {
     AsyncStorage.setItem('isLoggedIn', '');
     AsyncStorage.setItem('token', '');
+
     navigation.navigate("StartScreen");
 
   }
