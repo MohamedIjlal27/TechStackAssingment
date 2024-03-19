@@ -48,7 +48,7 @@ const RegisterScreen = () => {
         };
 
         if (nameVerify && emailVerify && passwordVerify && confirmPasswordVerify) {
-            axios.post("http://192.168.29.218:5001/register", userData)
+            axios.post("http://192.168.29.218:3000/register", { timeout: 10000 }, userData)
                 .then((res) => {
                     console.log(res.data);
                     if (res.data.status === "OK") {

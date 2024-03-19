@@ -31,7 +31,7 @@ const LoginScreen = () => {
             email: email,
             password: password
         }
-        axios.post("http://192.168.29.218:5001/loginuser", userData)
+        axios.post("http://192.168.29.218:3000/loginuser", userData)
             .then((res) => {
                 if (res.data.status === "OK") {
                     Alert.alert("Logged In Successfully");
