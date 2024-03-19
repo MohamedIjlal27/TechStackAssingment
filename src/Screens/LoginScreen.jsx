@@ -31,7 +31,7 @@ const LoginScreen = () => {
             email: email,
             password: password
         }
-        axios.post("http://192.168.29.218:3000/loginuser", userData)
+        axios.post("http://192.168.185.218:5001/loginuser", userData)
             .then((res) => {
                 if (res.data.status === "OK") {
                     Alert.alert("Logged In Successfully");
@@ -61,7 +61,7 @@ const LoginScreen = () => {
                 />
                 <TextInputComp
                     style={styles.input}
-                    placeholder="Password"
+                    placeholder="User Password"
                     onChangeText={handlePassword}
                     secureTextEntry={!showPassword}
                     showPassword={showPassword}

@@ -1,14 +1,26 @@
-/** @format */
-
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-app.use(express.json());
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+// Enable CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 const mongoUrl =
-  'mongodb+srv://ijlalssck1940:ijlalssck1940@cluster0.jvm2wp8.mongodb.net/';
+  'mongodb+srv://ijlalssck1940:ijlalssck1940@cluster0.ya8mk2a.mongodb.net/StackTechAssingment';
 
 const JWT_SECRET =
   'hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jdsds039[]]pou89ywe';

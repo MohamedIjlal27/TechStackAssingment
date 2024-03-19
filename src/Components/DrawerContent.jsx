@@ -49,7 +49,6 @@ function DrawerContent(props) {
   function signOut() {
     AsyncStorage.setItem('isLoggedIn', '');
     AsyncStorage.setItem('token', '');
-
     navigation.navigate("StartScreen");
 
   }
@@ -59,7 +58,7 @@ function DrawerContent(props) {
     const token = await AsyncStorage.getItem('token');
     console.log(token);
     axios
-      .post('http://192.168.29.218:3000/userdata', { token: token })
+      .post('http://192.168.185.218:5001/userdata', { token: token })
       .then(res => {
         console.log(res.data);
         setUserData(res.data.data);
